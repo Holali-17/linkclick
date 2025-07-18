@@ -637,7 +637,7 @@ async getFriendsPage() {
   return `
     <div class="message ${msg.from_current_user ? 'sent' : 'received'}">
       <div class="message-content">${msg.content}</div>
-      <div class="message-time">${this.formatTime(msg.created_at)}</div>
+      <div class="message-time">${this.formatTime(msg.created_at)} par ${msg.from_current_user ? 'vous' : msg.sender_name}</div>
     </div>
   `
 }
