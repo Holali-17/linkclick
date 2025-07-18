@@ -11,4 +11,5 @@
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    Content-Security-Policy = "default-src 'self'; connect-src 'self' https://linkclick.onrender.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    Access-Control-Allow-Origin = "https://linkclick.onrender.com"
