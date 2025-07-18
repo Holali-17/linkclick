@@ -73,16 +73,17 @@ try {
     
     // Générer le token de vérification
     $verificationToken = Security::generateToken();
-    
+    $valide=1;
     // Insérer l'utilisateur
-    $insertQuery = "INSERT INTO users (firstname, lastname, email, password, verification_token, created_at) 
-                    VALUES (:firstname, :lastname, :email, :password, :verification_token, NOW())";
-    
+    $insertQuery = "INSERT INTO users (firstname, lastname, email, password, email_verified, verification_token, created_at) 
+                    VALUES (:firstname, :lastname, :email, :password, :email_verified, :verification_token, NOW())";
+
     $insertStmt = $db->prepare($insertQuery);
     $insertStmt->bindParam(':firstname', $firstname);
     $insertStmt->bindParam(':lastname', $lastname);
     $insertStmt->bindParam(':email', $email);
     $insertStmt->bindParam(':password', $hashedPassword);
+    $insertStmt->bindParam(':email_verified', $valide, PDO::PARAM_INT);
     $insertStmt->bindParam(':verification_token', $verificationToken);
     
     if (!$insertStmt->execute()) {
