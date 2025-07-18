@@ -2,10 +2,10 @@
 // Configuration de la base de données LinkClick
 
 class Database {
-    private $host = "localhost";
+    private $host = "nue.domcloud.co";
     private $db_name = "linkclick_db";
-    private $username = "root";
-    private $password = "";
+    private $username = "linkclick";
+    private $password = "f_O-Bc+K7z58y6mMX1";
     private $conn;
 
     public function getConnection() {
