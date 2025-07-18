@@ -11,5 +11,12 @@
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    Content-Security-Policy = "default-src 'self'; connect-src 'self' https://linkclick.onrender.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    Content-Security-Policy = """
+      default-src 'self';
+      connect-src 'self' https://linkclick.onrender.com;
+      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
+      font-src 'self' https://cdnjs.cloudflare.com;
+      img-src 'self' data:;
+    """
     Access-Control-Allow-Origin = "https://linkclick.onrender.com"
