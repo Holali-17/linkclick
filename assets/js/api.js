@@ -2,7 +2,7 @@ class APIClient {
   constructor() {
     //is.baseURL = "https://link-click.loca.lt/api/";
 
-    this.baseURL = "http://localhost:3000/api/";
+    this.baseURL = "https://linkclick.onrender.com/api/";
     this.token = sessionStorage.getItem("linkclick_token");
   }
 
