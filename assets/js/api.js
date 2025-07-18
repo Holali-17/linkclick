@@ -6,9 +6,11 @@ class APIClient {
     this.token = sessionStorage.getItem("linkclick_token");
   }
 
-  async request(endpoint, options = {}) {
+async request(endpoint, options = {}) {
     const url = this.baseURL + endpoint;
     const config = {
+      mode: 'cors',
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
@@ -26,14 +28,20 @@ class APIClient {
 
     try {
       const response = await fetch(url, config);
-      const contentType = response.headers.get("content-type");
-
-      if (!contentType || !contentType.includes("application/json")) {
-        const text = await response.text();
-        throw new Error(`Expected JSON, but received ${contentType || "unknown content type"}: ${text.slice(0, 100)}...`);
+      
+      // Modification ici: Essayez toujours de parser en JSON, peu importe le Content-Type
+      const text = await response.text();
+      let data;
+      
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (e) {
+        // Si le parsing échoue mais que la réponse est OK, retournez le texte brut
+        if (response.ok) {
+          return text;
+        }
+        throw new Error(`Invalid JSON response: ${text.slice(0, 100)}...`);
       }
-
-      const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.message || `HTTP error ${response.status}`);
@@ -44,7 +52,7 @@ class APIClient {
       console.error(`API Error for ${url}:`, error);
       throw error;
     }
-  }
+}
 
   // Authentification
   async login(credentials) {
