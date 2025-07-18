@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: linkclick
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: APACHE_DOCUMENT_ROOT
+        value: /var/www/html
